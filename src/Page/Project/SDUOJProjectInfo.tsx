@@ -4,18 +4,14 @@ import {DataNode} from 'antd/lib/tree';
 import Title from "antd/es/typography/Title";
 import {useLocation, useParams} from "react-router-dom";
 import {tagOptions} from "../../Config/Project/data";
-import ModalContentSubmit from "../../Component/Project/ModalContentSubmit";
 import {useSelector} from "react-redux";
 import {IState} from "../../Type/base";
 import {Api} from "../../API/api";
 import {buildTree} from "../../Utils/buildTree";
-import ApplyPermission from "../../Component/Permission/ApplyPermission";
-import UserContentScore from "./Info/UserContentScore";
-import CreateTemplate from "../../Component/Project/CreateTemplate";
 import {DownOutlined} from "@ant-design/icons";
-import Approval from "../../Component/Permission/Approval";
 import {SubmissionList} from "../../Component/SDUOJ/SubmissionList/SubmissionList";
 import {SDUSubmit} from "../../Component/SDUOJ/SDUSubmit";
+import ReactMarkdown from "react-markdown";
 
 
 const {Sider, Content} = Layout;
@@ -31,11 +27,11 @@ interface keyIdMap {
 const keyIdMap: keyIdMap = {}//key和id的字典
 const IdConMap: keyIdMap = {}
 const ProjectInfo: React.FC = () => {
+    //contestId:pId,problemCode:cId
     const [selectedMenuKey, setSelectedMenuKey] = useState<number | null>(null);
     const [type, setType] = useState<IProjectContentType>("office_word")//原本的数据
     const [treeData, setTreeData] = useState<DataNode[] | undefined>(undefined);//树形数据
     const {pId} = useParams();
-    const userinfo = useSelector((state: IState) => state.UserReducer.userInfo);
     const location = useLocation();
     const {item, permissions} = location.state;
     const generateTreeData = (data: any) => {//根据后端数据递归获得treeData
@@ -75,21 +71,19 @@ const ProjectInfo: React.FC = () => {
             generateTreeData(treeData);
     }, [treeData])
     let items: MenuProps['items'] = []
-    let manageitems: MenuProps['items'] = [
-
-    ]
+    let manageitems: MenuProps['items'] = []
     if (selectedMenuKey && IdConMap[selectedMenuKey]) {
         if (permissions.some((e: any) => e === '项目提交'))
             items = [
                 {
                     key: '2',
                     label: (
-                        <SubmissionList />
+                        <SubmissionList contestId={pId} problemCode={IdConMap[selectedMenuKey].id}/>
                     )
                 },
                 {
-                    key:'3',
-                    label: <SDUSubmit />,
+                    key: '3',
+                    label: <SDUSubmit contestId={pId} problemCode={IdConMap[selectedMenuKey].id}/>,
                 }
             ]
     }
@@ -121,7 +115,7 @@ const ProjectInfo: React.FC = () => {
                     <Space size={12}>
                         {/*还有一些待传的参数*/}
                         {
-                            selectedMenuKey &&IdConMap[selectedMenuKey] && item.type !== '教学资源' && (
+                            selectedMenuKey && IdConMap[selectedMenuKey] && item.type !== '教学资源' && (
                                 <>
                                     <Dropdown
                                         menu={{items}}
@@ -158,12 +152,17 @@ const ProjectInfo: React.FC = () => {
                 </Sider>
                 <Layout>
                     <Content style={{padding: '24px'}}>
-
+                        {
+                            selectedMenuKey && IdConMap[selectedMenuKey] && (
+                                <div style={{textAlign: "left"}}>
+                                    <ReactMarkdown children={IdConMap[selectedMenuKey].content}/>
+                                </div>
+                            )
+                        }
                     </Content>
                 </Layout>
             </Layout>
         </div>
-    )
-        ;
+    );
 };
 export default ProjectInfo;

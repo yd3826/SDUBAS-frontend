@@ -36,11 +36,15 @@ export default function ProCard({item, TableName, pathname}: any) {
             }}
         >
             <Row style={{minWidth: '1200px'}}>
-                <Col span={2} style={{height: "80px"}}>
-                    <Image
-                        src={item.url}
-                        alt="Item Image" style={{height: '80px'}} preview={false}/>
-                </Col>
+                {
+                    tags !== 'SDUOJ ' && (
+                        <Col span={2} style={{height: "80px"}}>
+                            <Image
+                                src={item.url}
+                                alt="Item Image" style={{height: '80px'}} preview={false}/>
+                        </Col>
+                    )
+                }
                 <Col span={5}
                      onMouseEnter={() => setIsHovered(true)}
                      onMouseLeave={() => setIsHovered(false)}
@@ -48,7 +52,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                          if (item.active === 0) {
                              message.info('未开放');
                          } else {
-                             if(tags === 'SDUOJ ') {
+                             if (tags === 'SDUOJ ') {
                                  navigate(`/c/sduoj/project-info/${item.id}`, {
                                      state: {
                                          url: item.url,
@@ -56,8 +60,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                                          permissions: permission
                                      }
                                  });
-                             }
-                             else {
+                             } else {
                                  navigate(`/c/project-info/${item.id}`, {
                                      state: {
                                          url: item.url,
@@ -70,11 +73,11 @@ export default function ProCard({item, TableName, pathname}: any) {
                      }}
                 >
                     <div style={{fontWeight: 'bold', textAlign: 'center', justifyContent: 'center'}}>{item.name}</div>
-                    <div style={{display:'flex',justifyContent:'center',gap:'10px',marginTop:'5px'}}>
-                        <div style={{ fontSize: '12px' }}>
+                    <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '5px'}}>
+                        <div style={{fontSize: '12px'}}>
                             {convertTimestamp(item.create_dt)}
                         </div>
-                        <Tag style={{ fontSize: '12px' }}>{tags}</Tag>
+                        <Tag style={{fontSize: '12px'}}>{tags}</Tag>
                     </div>
                 </Col>
                 <Col span={2}>
@@ -90,7 +93,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'flex-start'}} span={4}>
                     {
-                        permission.some((e: any) => e === '项目编辑') && (
+                        permission.some((e: any) => e === '项目编辑') && tags !== 'SDUOJ ' && (
                             <>
                                 <ModalFormUseForm
                                     title={t('编辑项目')}
@@ -120,6 +123,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                                         return Api.updatePro({pId: item.id, data: value});
                                     }}
                                 />
+
                                 <ModalRoleManage editable={false} newRole={false} newUser={false} btnType={'link'}
                                                  TableName={`Project${item.id}Roles`} service_type={7}
                                                  service_id={item.id}/>

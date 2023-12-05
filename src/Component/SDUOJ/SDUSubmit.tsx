@@ -2,6 +2,8 @@ import {Form, Input, Select} from "antd";
 import ModalFormUseForm from "../Common/Form/ModalFormUseForm";
 import TextArea from "antd/es/input/TextArea";
 import '../../Config/CSS/HeightModal.css'
+import {useEffect, useState} from "react";
+import {Api} from "../../API/api";
 
 const templateOpts = [
     {
@@ -34,6 +36,11 @@ const templateOpts = [
     }
 ]
 export const SDUSubmit = (props: any) => {
+    const [options,setOption] = useState<any>([]);
+    useEffect(()=>{
+        //todo:请求judgeTemplateId
+
+    },[])
     return (
         <ModalFormUseForm
             btnType={'text'}
@@ -55,7 +62,7 @@ export const SDUSubmit = (props: any) => {
                             >
                                 <Select>
                                     {
-                                        templateOpts.map((opt: any) => {
+                                        options.map((opt: any) => {
                                             return (<Select.Option value={opt.key}>{opt.value}</Select.Option>)
                                         })
                                     }
@@ -73,11 +80,16 @@ export const SDUSubmit = (props: any) => {
                                         style={{width:'100%',height:'400px'}}
                                     />
                             </Form.Item>
+                            <Form.Item name={'problemCode'} initialValue={props.problemCode} style={{display:'none'}}></Form.Item>
+                            <Form.Item name={'contestId'} initialValue={props.contestId} style={{display:'none'}}></Form.Item>
                         </>
                     ),
                     label: ''
                 }
             ]}
+            dataSubmitter={async (data:any)=>{
+                return Api.contentSubmit({data:data})
+            }}
         />
     )
 }

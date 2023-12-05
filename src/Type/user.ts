@@ -11,13 +11,6 @@ export enum Sex {
 export interface IUserInfo {
     email: string
     username: string
-    is_bind: any
-    status: any
-    card_id:string
-    roles: Role
-    enrollment_dt:string
-    graduation_dt:string
-    realname:string,
     oj_bind:boolean//oj绑定
     oj_username:string,
 }

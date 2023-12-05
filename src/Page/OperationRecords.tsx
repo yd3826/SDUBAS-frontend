@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Api} from "../API/api";
-import {
-    CheckCircleOutlined,
-    CloseOutlined
-} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseOutlined} from "@ant-design/icons";
 import TableWithPagination from "../Component/Common/Table/TableWithPagination";
 import ValidButton from "../Component/Record/ValidButton";
 import {Button, Card, Descriptions} from "antd";
@@ -35,6 +32,8 @@ export const Reject = () => (
     </div>
     // {/*</div>*/}
 )
+
+
 const OperationRecords = () => {
     const dataSource = useSelector((state: IState) => state.TableReducer.tableData['OperationsTable'])
     const [isPass, setIsPass] = useState<any>(undefined);
@@ -43,6 +42,16 @@ const OperationRecords = () => {
     const dispatch = useDispatch();
     const setDataSource = (data: any, name: string) => {
         return dispatch({type: 'setDataSource', data: data, name: name, add: true})
+    }
+    function formatTimestamp(timestamp: string): string {
+        // 将 "T" 替换为空格
+        const formattedTimestamp = timestamp.replace("T", " ");
+
+        // 查找最后一个小数点的索引
+        const dotIndex = formattedTimestamp.lastIndexOf(".");
+
+        // 如果存在小数点，则截取小数点之前的部分
+        return dotIndex !== -1 ? formattedTimestamp.slice(0, dotIndex) : formattedTimestamp;
     }
     useEffect(() => {
         setIsPass(undefined);
@@ -101,12 +110,12 @@ const OperationRecords = () => {
                     bordered
                 >
                     <Descriptions.Item label={'节点id'}>{blockInfo?.id}</Descriptions.Item>
-                    <Descriptions.Item label={'用户数量'}>{blockInfo?.user_cnt}</Descriptions.Item>
+                    <Descriptions.Item label={'用户数量'}>{blockInfo?.num_cnt}</Descriptions.Item>
                     <Descriptions.Item label={'交易总数'}>{blockInfo?.deal_cnt}</Descriptions.Item>
                     <Descriptions.Item label={'最新区块高度'}>{blockInfo?.latest_block_height}</Descriptions.Item>
-                    <Descriptions.Item label={'最新区块时间戳'}>{blockInfo?.latest_block_time}</Descriptions.Item>
+                    <Descriptions.Item label={'最新区块时间戳'}>{formatTimestamp(blockInfo?.latest_block_time || '')}</Descriptions.Item>
                     <Descriptions.Item label={'验证者地址'}>{blockInfo?.address}</Descriptions.Item>
-                    <Descriptions.Item label={'创世区块时间'}>{blockInfo?.earliest_block_time}</Descriptions.Item>
+                    <Descriptions.Item label={'创世区块时间'}>{formatTimestamp(blockInfo?.earliest_block_time || '')}</Descriptions.Item>
                     {/*<Descriptions.Item label={'节点id'}>ddc4b1fd46771dcaabd4e30ed7d8d0039ebc532a</Descriptions.Item>*/}
                     {/*<Descriptions.Item label={'用户数量'}>2573</Descriptions.Item>*/}
                     {/*<Descriptions.Item label={'交易总数'} style={{width:'150px'}}>14235</Descriptions.Item>*/}

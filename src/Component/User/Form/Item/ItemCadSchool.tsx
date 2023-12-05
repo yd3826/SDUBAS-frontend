@@ -99,7 +99,7 @@ export const ItemCadSchool = (props: any) => {
             </Form.Item>
             <Form.Item
                 label={'专业'}
-                name={'major'}
+                name={'major_id'}
             >
                 <Select value={major} onChange={(e) => {
                     setMajor(e)
@@ -120,7 +120,7 @@ export const ItemCadSchool = (props: any) => {
             </Form.Item>
             <Form.Item
                 label={'班级'}
-                name={'class'}
+                name={'class_id'}
                 shouldUpdate
             >
                 <Select value={Class} onChange={(e) => {
