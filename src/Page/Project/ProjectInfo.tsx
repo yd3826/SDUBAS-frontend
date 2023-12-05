@@ -294,7 +294,7 @@ const ContentPlay = (props: any) => {
     return (
         <>
             {
-                file.type === "video" && (
+                file.file_type === "video" && (
                     <PlayerWithDuration
                         url={file.url}
                         pId={props.pId}
@@ -303,7 +303,7 @@ const ContentPlay = (props: any) => {
                 )
             }
             {
-                (file.type === "office_word") && (
+                (file.file_type === "office_word") && (
                     <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}
                                     config={{
                                         "document": {
@@ -319,7 +319,7 @@ const ContentPlay = (props: any) => {
                                         },
                                         "documentType": 'word',
                                     }}
-                                    height={'729px'}
+                                    height={'720px'}
                                     width={'100%'}
                     />
                     // <iframe
@@ -331,7 +331,7 @@ const ContentPlay = (props: any) => {
                 )
             }
             {
-                file.type === "office_ppt" && (
+                file.file_type === "office_ppt" && (
                     <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8080'}
                                     config={{
                                         "document": {
@@ -353,7 +353,7 @@ const ContentPlay = (props: any) => {
                 )
             }
             {
-                props.type === 'application/pdf' && (
+                file.file_type === 'application/pdf' && (
                     <iframe
                         title="demo.docx"
                         src={file.url}
@@ -363,7 +363,7 @@ const ContentPlay = (props: any) => {
                 )
             }
             {
-                file.type === 'zip' && (
+                file.file_type === 'zip' && (
                     <>
                         <div style={{ display: "table", width: "200px", textAlign: "left", margin: "20px" }}>
                             <div style={{ display: "table-row" }}>
