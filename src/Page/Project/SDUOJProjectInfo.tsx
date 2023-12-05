@@ -15,6 +15,7 @@ import CreateTemplate from "../../Component/Project/CreateTemplate";
 import {DownOutlined} from "@ant-design/icons";
 import Approval from "../../Component/Permission/Approval";
 import {SubmissionList} from "../../Component/SDUOJ/SubmissionList/SubmissionList";
+import {SDUSubmit} from "../../Component/SDUOJ/SDUSubmit";
 
 
 const {Sider, Content} = Layout;
@@ -75,34 +76,11 @@ const ProjectInfo: React.FC = () => {
     }, [treeData])
     let items: MenuProps['items'] = []
     let manageitems: MenuProps['items'] = [
-        {
-            key: '1',
-            label: (
-                <ApplyPermission service_type={7} service_id={item.id}/>
-            )
-        },
-        {
-            key: '2',
-            label: (
-                <CreateTemplate service_type={7} service_id={item.id}/>
-            )
-        },
-        {
-            key: '10',
-            label: (
-                <Approval pId={pId} service_type={7}/>
-            )
-        }
+
     ]
     if (selectedMenuKey && IdConMap[selectedMenuKey]) {
         if (permissions.some((e: any) => e === '项目提交'))
             items = [
-                {
-                    key: '1',
-                    label: (
-                        <UserContentScore pId={pId}/>
-                    )
-                },
                 {
                     key: '2',
                     label: (
@@ -111,7 +89,7 @@ const ProjectInfo: React.FC = () => {
                 },
                 {
                     key:'3',
-                    label: '提交'
+                    label: <SDUSubmit />,
                 }
             ]
     }
@@ -177,21 +155,6 @@ const ProjectInfo: React.FC = () => {
                             style={{background: '#f0f2f5', paddingTop: 8, paddingLeft: 4, paddingBottom: 8}}
                         />
                     }
-
-                    <div style={{left: '0%', width: '100px'}}>
-                        <Dropdown
-                            menu={{items: manageitems}}
-                        >
-                            <Button type="text" size={"large"}>
-                                <Space>
-                                    <div style={{marginTop: -10}}>
-                                        管理项目
-                                    </div>
-                                    <DownOutlined style={{fontSize: 10, marginBottom: 20}}/>
-                                </Space>
-                            </Button>
-                        </Dropdown>
-                    </div>
                 </Sider>
                 <Layout>
                     <Content style={{padding: '24px'}}>

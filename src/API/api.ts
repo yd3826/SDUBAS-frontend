@@ -284,6 +284,9 @@ export const Api: { [key: string]: any } = {
         return request.get(`/projects/${data.pId}/credits/all`,data.data);//获得所有的学分认证
     },
     //oj
+    getOjPro:async (data:any)=>{
+        return {rows:[{active:1,create_dt: "1697112050000",id:38,name:"A+B",tag:"11",type:'实验'}]}
+    },
     getOjContent:async (data:any)=>{
         return [{id:1,content:'222',prefix:'A题',name:'what'}]
     },
