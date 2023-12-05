@@ -285,17 +285,22 @@ export const Api: { [key: string]: any } = {
     },
     //oj
     getOjPro:async (data:any)=>{
-        return {rows:[{active:1,create_dt: "1697112050000",id:38,name:"A+B",tag:"11",type:'实验'}]}
+        return request.get('/projects/api/contest/list',data.data);//比赛列表1
+        // return {rows:[{active:1,create_dt: "1697112050000",id:38,name:"A+B",tag:"11",type:'实验'}]};
     },
     getOjContent:async (data:any)=>{
         // return [{id:1,content:'222',prefix:'A题',name:'what'}]
-        return request.get(`/projects/api/contest/query/${data.contestId}`);
+        return request.get(`/projects/api/contest/query/`,data.data);//返回比赛内容1
     },
     getSubmissionList:async (data:any)=>{
-      return {rows:[{submissionId:1,username:'202100150155',problemCode:'SDUOJ-1000',problemTitle:'A+B problem',result:'1',score:90,submitTime:'2023-11-01',code:'#include'}]}
+        return request.get('/projects/api/contest/listSubmission',data.data);//返回提交记录1
+      // return {rows:[{submissionId:1,username:'202100150155',problemCode:'SDUOJ-1000',problemTitle:'A+B problem',result:'1',score:90,submitTime:'2023-11-01',code:'#include'}]}
     },
     contestSubmit:async (data:any)=>{
-        return request.post('/projects/api/contestcreateSubmission',data.data);
+        return request.post('/projects/api/contest/createSubmission',data.data);//提交1
+    },
+    getSubmissionInfo:async (data:any)=>{
+      return request.get('/projects/api/contest/query/submission',data.data);//提交详情1
     },
     //creditBank学分银行
     getUserCredits: async (data: any) => {

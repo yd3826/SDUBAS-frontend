@@ -49,9 +49,9 @@ const ProjectInfo: React.FC = () => {
         setSelectedMenuKey(node.key);
     };
     useEffect(() => {
-        Api.getOjContent({pId: pId})
+        Api.getOjContent({contestId: pId})
             .then(async (data: any) => {
-                console.log(data)
+                console.log('oj比赛内容',data);
                 data.map((d: any) => {
                     const {id} = d;
                     IdConMap[id] = d;
@@ -73,7 +73,6 @@ const ProjectInfo: React.FC = () => {
     let items: MenuProps['items'] = []
     let manageitems: MenuProps['items'] = []
     if (selectedMenuKey && IdConMap[selectedMenuKey]) {
-        if (permissions.some((e: any) => e === '项目提交'))
             items = [
                 {
                     key: '2',
@@ -83,7 +82,7 @@ const ProjectInfo: React.FC = () => {
                 },
                 {
                     key: '3',
-                    label: <SDUSubmit contestId={pId} problemCode={IdConMap[selectedMenuKey].id}/>,
+                    label: <SDUSubmit contestId={pId} problemCode={IdConMap[selectedMenuKey].id} judgeTemplates={IdConMap[selectedMenuKey].judgeTemplates}/>,
                 }
             ]
     }

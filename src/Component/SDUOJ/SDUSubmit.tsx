@@ -5,42 +5,7 @@ import '../../Config/CSS/HeightModal.css'
 import {useEffect, useState} from "react";
 import {Api} from "../../API/api";
 
-const templateOpts = [
-    {
-        key: 0,
-        value: 'C++14'
-    },
-    {
-        key: 1,
-        value: 'Python3.6'
-    },
-    {
-        key: 2,
-        value: 'Java8'
-    },
-    {
-        key: 3,
-        value: 'C11'
-    },
-    {
-        key: 4,
-        value: 'C++17'
-    },
-    {
-        key: 5,
-        value: 'Java17'
-    },
-    {
-        key: 6,
-        value: 'Python3.11'
-    }
-]
 export const SDUSubmit = (props: any) => {
-    const [options,setOption] = useState<any>([]);
-    useEffect(()=>{
-        //todo:请求judgeTemplateId
-
-    },[])
     return (
         <ModalFormUseForm
             btnType={'text'}
@@ -62,8 +27,8 @@ export const SDUSubmit = (props: any) => {
                             >
                                 <Select>
                                     {
-                                        options.map((opt: any) => {
-                                            return (<Select.Option value={opt.key}>{opt.value}</Select.Option>)
+                                        props.judgeTemplates.map((opt: any) => {
+                                            return (<Select.Option value={opt.id}>{opt.title}</Select.Option>)
                                         })
                                     }
                                 </Select>
@@ -88,6 +53,7 @@ export const SDUSubmit = (props: any) => {
                 }
             ]}
             dataSubmitter={async (data:any)=>{
+                console.log('提交内容',data);
                 return Api.contentSubmit({data:data})
             }}
         />

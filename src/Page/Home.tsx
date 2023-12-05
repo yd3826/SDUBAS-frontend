@@ -6,6 +6,7 @@ import {Col, Image, Row} from "antd";
 import React from "react";
 import JumpButton from "../Component/Common/JumpButton";
 import Title from "antd/es/typography/Title";
+import moment from "moment";
 
 const Home = () => {
     // Api.logout()

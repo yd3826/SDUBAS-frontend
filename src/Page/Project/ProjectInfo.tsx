@@ -308,7 +308,7 @@ const ContentPlay = (props: any) => {
                                     config={{
                                         "document": {
                                             "fileType": "docx",
-                                            "key": "",
+                                            "key": file.file_name,
                                             "title": file.file_name,
                                             "url": file.url,
                                             permissions: {
@@ -332,11 +332,11 @@ const ContentPlay = (props: any) => {
             }
             {
                 file.file_type === "office_ppt" && (
-                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8080'}
+                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}
                                     config={{
                                         "document": {
                                             "fileType": "ppt",
-                                            "key": "",
+                                            "key": file.file_name,
                                             "title": file.file_name,
                                             "url": file.url,
                                             permissions: {
