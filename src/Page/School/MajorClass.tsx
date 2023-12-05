@@ -109,25 +109,25 @@ const MajorClass = () => {
                                                          API={async (data: any) => {
                                                              return Api.newLine({data: data})
                                                          }}/>
-                                            {/*<DeleteConfirm*/}
-                                            {/*    onConfirm={() => {*/}
-                                            {/*        dispatch(getData(*/}
-                                            {/*            'deleteMajor',*/}
-                                            {/*            {mId: item.id},*/}
-                                            {/*            (res: any) => {*/}
-                                            {/*                AddTableVersion(college.id + 'ClassTable')*/}
-                                            {/*                message.success('删除成功')*/}
-                                            {/*                return Promise.resolve(res);*/}
-                                            {/*            },*/}
-                                            {/*            (error: any) => {*/}
-                                            {/*                message.error('删除失败');*/}
-                                            {/*            }*/}
-                                            {/*        ));*/}
-                                            {/*    }}//删除的Api*/}
-                                            {/*    content={*/}
-                                            {/*        <Button type={'link'} danger={true}>删除</Button>*/}
-                                            {/*    }*/}
-                                            {/*/>*/}
+                                            <DeleteConfirm
+                                                onConfirm={() => {
+                                                    dispatch(getData(
+                                                        'deleteMajor',
+                                                        {mId: item.id},
+                                                        (res: any) => {
+                                                            AddTableVersion(college.id + 'ClassTable')
+                                                            message.success('删除成功')
+                                                            return Promise.resolve(res);
+                                                        },
+                                                        (error: any) => {
+                                                            message.error('删除失败');
+                                                        }
+                                                    ));
+                                                }}//删除的Api
+                                                content={
+                                                    <Button type={'link'} danger={true}>删除</Button>
+                                                }
+                                            />
                                         </Col>
                                     </Row>
 

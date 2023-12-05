@@ -39,7 +39,7 @@ export const WorkLog = (props: any) => {
                     }
                 })
                 setIsPass(flag)
-                setDataSource(data, 'OperationsTable');
+                setDataSource(data, `${props.service_type}${props.service_id}BlockchainTable`);
                 setLoading(false);
             })
                 .catch(() => {
@@ -59,7 +59,7 @@ export const WorkLog = (props: any) => {
                 }}
                 open={visible}
                 footer={null}
-                width={'1000px'}
+                width={'1500px'}
             >
                 <div style={{marginLeft: '90%'}}>
                     {

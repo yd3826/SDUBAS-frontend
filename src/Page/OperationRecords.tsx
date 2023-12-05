@@ -84,25 +84,38 @@ const OperationRecords = () => {
         <div
             className={"table-container"}
         >
-            <Descriptions
+            <Card
                 title={'区块链节点信息'}
-                bordered
+                headStyle={{textAlign: 'left'}}
+                style={{top: '20px'}}
+                extra={
+                    <Button type={'primary'} onClick={()=>{
+                        Api.getBlockInfo().then((res: any) => {
+                            setBlockInfo(res);
+                        }).catch(() => {
+                        })
+                    }}>刷新</Button>
+                }
             >
-                <Descriptions.Item label={'节点id'}>{blockInfo?.id}</Descriptions.Item>
-                <Descriptions.Item label={'用户数量'}>{blockInfo?.user_cnt}</Descriptions.Item>
-                <Descriptions.Item label={'交易总数'}>{blockInfo?.deal_cnt}</Descriptions.Item>
-                <Descriptions.Item label={'最新区块高度'}>{blockInfo?.latest_block_height}</Descriptions.Item>
-                <Descriptions.Item label={'最新区块时间戳'}>{blockInfo?.latest_block_time}</Descriptions.Item>
-                <Descriptions.Item label={'验证者地址'}>{blockInfo?.address}</Descriptions.Item>
-                <Descriptions.Item label={'创世区块时间'}>{blockInfo?.earliest_block_time}</Descriptions.Item>
-                {/*<Descriptions.Item label={'节点id'}>ddc4b1fd46771dcaabd4e30ed7d8d0039ebc532a</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'用户数量'}>2573</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'交易总数'} style={{width:'150px'}}>14235</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'最新区块高度'}>66710</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'最新区块时间戳'}>2023-12-04T12:22:39.066334994Z</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'验证者地址'}>E0013A41EA84B6B77440266DDB8E8CDBDC04E054</Descriptions.Item>*/}
-                {/*<Descriptions.Item label={'创世区块时间'}>2023-11-26T06:38:23.283227273Z</Descriptions.Item>*/}
-            </Descriptions>
+                <Descriptions
+                    bordered
+                >
+                    <Descriptions.Item label={'节点id'}>{blockInfo?.id}</Descriptions.Item>
+                    <Descriptions.Item label={'用户数量'}>{blockInfo?.user_cnt}</Descriptions.Item>
+                    <Descriptions.Item label={'交易总数'}>{blockInfo?.deal_cnt}</Descriptions.Item>
+                    <Descriptions.Item label={'最新区块高度'}>{blockInfo?.latest_block_height}</Descriptions.Item>
+                    <Descriptions.Item label={'最新区块时间戳'}>{blockInfo?.latest_block_time}</Descriptions.Item>
+                    <Descriptions.Item label={'验证者地址'}>{blockInfo?.address}</Descriptions.Item>
+                    <Descriptions.Item label={'创世区块时间'}>{blockInfo?.earliest_block_time}</Descriptions.Item>
+                    {/*<Descriptions.Item label={'节点id'}>ddc4b1fd46771dcaabd4e30ed7d8d0039ebc532a</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'用户数量'}>2573</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'交易总数'} style={{width:'150px'}}>14235</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'最新区块高度'}>66710</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'最新区块时间戳'}>2023-12-04T12:22:39.066334994Z</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'验证者地址'}>E0013A41EA84B6B77440266DDB8E8CDBDC04E054</Descriptions.Item>*/}
+                    {/*<Descriptions.Item label={'创世区块时间'}>2023-11-26T06:38:23.283227273Z</Descriptions.Item>*/}
+                </Descriptions>
+            </Card>
             <Card
                 title={'日志记录'}
                 headStyle={{textAlign: 'left'}}
