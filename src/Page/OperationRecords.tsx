@@ -149,19 +149,19 @@ const OperationRecords = () => {
                             title: '操作',
                             key: 'operation',
                             dataIndex: 'func',
-                            width: '200px'
+                            width: '100px'
                         },
                         {
                             title: '时间',
                             key: 'time',
                             dataIndex: 'oper_dt',
-                            width: '150px'
+                            width: '80px'
                         },
                         {
                             title: '本地hash',
                             key: 'local_hash',
                             dataIndex: 'local_hash',
-                            width: '180px'
+                            width: '80px'
                         },
                         {
                             title: '验证结果',
@@ -173,13 +173,13 @@ const OperationRecords = () => {
                                                  setDataSource={setDataSource} TableName={'OperationsTable'}/>
                                 )
                             },
-                            width: "200px"
+                            width: "80px"
                         },
                         {
                             title: '区块链hash',
                             key: 'blockchain_hash',
                             dataIndex: "blockchain_hash",
-                            width: '180px'
+                            width: '80px'
                         },
                         {
                             title: '区块号',
@@ -188,7 +188,7 @@ const OperationRecords = () => {
                             render: (block_number: number) => {
                                 return (block_number === undefined ? (<>未验证</>) : (<>{block_number}</>))
                             },
-                            width: "180px"
+                            width: "80px"
                         }
                     ]}
                 />
