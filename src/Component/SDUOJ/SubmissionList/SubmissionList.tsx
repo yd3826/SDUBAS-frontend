@@ -112,7 +112,7 @@ export const SubmissionList = (props: any) => {
                         },
                         {
                             title: "提交时间",
-                            dataIndex: "submitTime",
+                            dataIndex: "gmtCreate",
                             key: "submitTime",
                             render: (text: any) => {
                                 return moment(Number(text)).fromNow();
