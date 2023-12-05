@@ -82,7 +82,7 @@ export const SubmissionList = (props: any) => {
                         },
                         {
                             title: '结果',
-                            dataIndex: 'result',
+                            dataIndex: 'judgeResult',
                             key: 'result',
                             render: (text: any, record: any) => {
                                 return (
@@ -102,7 +102,7 @@ export const SubmissionList = (props: any) => {
                         },
                         {
                             title: '得分',
-                            dataIndex: 'score',
+                            dataIndex: 'judgeScore',
                             key: 'score',
                             render: (text: number, record: any) => {
                                 if (record.sumScore === undefined)
