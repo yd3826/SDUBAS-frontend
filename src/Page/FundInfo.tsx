@@ -32,7 +32,7 @@ const FundInfo = () => {
         dispatch({type: 'addTableVersion', name: name})
     }
     useEffect(() => {
-        Api.getUserPermission({data: {service_type: 6}})
+        Api.getUserPermission({data: {service_type: 6,service_id:row.Id}})
             .then((res: any) => {
                     setPermissions(res.map((e: any) => e.label))
                 }

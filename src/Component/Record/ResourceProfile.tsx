@@ -26,19 +26,10 @@ export const ResourceForm = (
 const ResourceProfile = () => {
 
     const navigate = useNavigate();
-    const permissions = useSelector((state: IState) => state.UserReducer.userPermission[5] ?? []);
     const dispatch = useDispatch();
     const addTableVersion = (name: string) => {
         dispatch({type: 'addTableVersion', name: name})
     }
-    useEffect(() => {
-        Api.getUserPermission({data: {service_type: 5}})
-            .then((res: any) => {
-                    dispatch({type: 'setUserPermission', service_type: 5, data: res.map((e: any) => e.label)})
-                }
-            ).catch(() => {
-        })
-    }, [])
     return (
         <>
             <div className={"table-container"}>
@@ -46,7 +37,8 @@ const ResourceProfile = () => {
                     style={{minWidth: '1000px'}}
                     title={'资源档案'}
                     headStyle={{textAlign: 'left'}}
-                    extra={<ModalFormUseForm
+                    extra={
+                    <ModalFormUseForm
                         title={'新建资源项目'}
                         type={'create'}
                         btnName={'新建资源'}
@@ -96,18 +88,12 @@ const ResourceProfile = () => {
                                 render: (_: any, rows: any) => {
                                     return (
                                         <>
-                                            <WorkLog service_type={5} service_id={rows.Id} btnType={'link'}/>
-                                            {
-                                                // permissions.some((e: any) => e === '资源编辑') && (
+                                                <WorkLog service_type={5} service_id={rows.Id} btnType={'link'}/>
                                                 <ModalRoleManage editable={false} newRole={false} newUser={false}
                                                                  btnType={'link'}
                                                                  TableName={`Resource${rows.Id}Roles`}
                                                                  service_type={5}
                                                                  service_id={rows.Id}/>
-                                            // )
-                                            }
-                                            {
-                                                // permissions.some((e: any) => e === '资源删除') && (
                                                 <DeleteConfirm
                                                     onConfirm={() => {
                                                         dispatch(getData(
@@ -127,8 +113,6 @@ const ResourceProfile = () => {
                                                         <Button type={'link'} danger={true}>删除</Button>
                                                     }
                                                 />
-                                            // )
-                                            }
                                         </>
                                     )
                                 },

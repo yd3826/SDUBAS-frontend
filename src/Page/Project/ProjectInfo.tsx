@@ -108,7 +108,7 @@ const ProjectInfo: React.FC = () => {
         }
     ]
     if (item.type !== '教学资源' || item.type !== '实验' ) {
-        // if (permissions.some((e: any) => e === '项目学分认定'))
+        if (permissions.some((e: any) => e === '项目学分认定'))
             manageitems.push({
                 key: '3', label: (
                     <CreditsRole pId={pId}/>
@@ -116,7 +116,7 @@ const ProjectInfo: React.FC = () => {
             })
     }
     if (selectedMenuKey && IdConMap[selectedMenuKey]) {
-        // if (permissions.some((e: any) => e === '项目提交'))
+        if (permissions.some((e: any) => e === '项目提交'))
             items = [
                 {
                     key: '1',
@@ -144,7 +144,7 @@ const ProjectInfo: React.FC = () => {
                     )
                 }
             ]
-        // if (permissions.some((e: any) => e === '项目批阅'))
+        if (permissions.some((e: any) => e === '项目批阅'))
             items.push(
                 {
                     key: '3',
@@ -155,7 +155,7 @@ const ProjectInfo: React.FC = () => {
                 }
             )
         if (item.type !== '教学资源') {
-            // if (permissions.some((e: any) => e === '项目批阅')) {
+            if (permissions.some((e: any) => e === '项目批阅')) {
                 manageitems.push({
                     key: '', label: (
                         <ModalFormUseForm
@@ -184,7 +184,7 @@ const ProjectInfo: React.FC = () => {
                         Api.getRefreshAll({pId: pId, cId: keyIdMap[selectedMenuKey].key})
                     }}>更新全部</Button>)
                 })
-            // }
+            }
         }
     }
     return (

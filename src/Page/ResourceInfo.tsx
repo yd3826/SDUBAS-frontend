@@ -17,7 +17,7 @@ const ResourceInfo = () => {
     const {row} = location.state;
     const [permissions,setPermissions] = useState<any>([]);
     useEffect(() => {
-        Api.getUserPermission({data: {service_type: 5}})
+        Api.getUserPermission({data: {service_type: 5,service_id:row.Id}})
             .then((res: any) => {
                     setPermissions(res.map((e: any) => e.label))
                 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Col, Divider, Image, message, Modal, Row, Tag} from "antd";
 import Meta from "antd/es/card/Meta";
 import ModalFormUseForm from "../Common/Form/ModalFormUseForm";
@@ -23,11 +23,18 @@ export default function ProCard({item, TableName, pathname}: any) {
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const permission = useSelector((state: IState) => state.UserReducer.userPermission[7] ?? []);
+    const [permission,setPermission] = useState<any>([]);
     const tags = convertTagstr(item.tag);
     const AddTableVersion = (name: string) => {
         dispatch({type: 'addTableVersion', name: name});
     }
+    useEffect(()=>{
+        Api.getUserPermission({data: {service_type: 7,service_id:item.id}})
+            .then((res: any) => {
+                    setPermission(res.map((e: any) => e.label))
+                }
+            )
+    },[])
     return (
         <Card
             style={{

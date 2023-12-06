@@ -21,14 +21,6 @@ import {useDispatch} from "../../Redux/Store";
 const Experiment = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    useEffect(() => {
-        Api.getUserPermission({data: {service_type: 7}})
-            .then((res: any) => {
-                    dispatch({type:'setUserPermission',service_type:7,data:res.map((e: any) => e.label)})
-                }
-            ).catch(()=>{})
-    }, [])
-
     return (
         <Tabs
             items={[
