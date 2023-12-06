@@ -44,7 +44,7 @@ const PlayerWithDuration = (props: any) => {
             url={props.url}
             controls
             width="100%"
-            height="80vh"
+            height="600vh"
             // onStart={handleStart}
             onPause={handlePause}
             onPlay={handlePlay}
