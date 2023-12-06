@@ -265,7 +265,7 @@ const ProjectInfo: React.FC = () => {
                         </Dropdown>
                     </div>
                 </Sider>
-                <Layout>
+                <Layout style={{height:'100vh'}}>
                     <Content style={{padding: '24px'}}>
                         {
                             selectedMenuKey && IdConMap[selectedMenuKey] ?

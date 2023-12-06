@@ -87,7 +87,7 @@ const ProjectInfo: React.FC = () => {
             ]
     }
     return (
-        <div style={{minWidth: 800}}>
+        <div style={{minWidth: 600}}>
             <div style={{textAlign: "left", marginBottom: 12, marginLeft: 6}}>
                 <Space size={24}>
                     <Image
@@ -149,7 +149,7 @@ const ProjectInfo: React.FC = () => {
                         />
                     }
                 </Sider>
-                <Layout>
+                <Layout style={{height:'100vh'}}>
                     <Content style={{padding: '24px'}}>
                         {
                             selectedMenuKey && IdConMap[selectedMenuKey] && (
@@ -157,6 +157,12 @@ const ProjectInfo: React.FC = () => {
                                     <ReactMarkdown children={IdConMap[selectedMenuKey].content}/>
                                 </div>
                             )
+                            // <iframe
+                            //     title="demo.docx"
+                            //     src={"http://111.15.182.56:41018/api/files/download/f991f19000c9456e8027115de495b18d"}
+                            //     width="100%"
+                            //     height="100%"
+                            // />
                         }
                     </Content>
                 </Layout>
