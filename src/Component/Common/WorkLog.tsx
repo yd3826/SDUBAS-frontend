@@ -85,19 +85,19 @@ export const WorkLog = (props: any) => {
                             title: '操作',
                             key: 'operation',
                             dataIndex: 'func',
-                            width: '200px'
                         },
                         {
                             title: '时间',
                             key: 'time',
                             dataIndex: 'oper_dt',
-                            width: '150px'
                         },
                         {
                             title: '本地hash',
                             key: 'local_hash',
                             dataIndex: 'local_hash',
-                            width: '180px'
+                            render:(hash:string)=>{
+                                return <div style={{ wordBreak: 'break-all', width: '100px' }}>{hash}</div>
+                            }
                         },
                         {
                             title: '验证结果',
@@ -110,13 +110,14 @@ export const WorkLog = (props: any) => {
                                                  TableName={`${props.service_type}${props.service_id}BlockchainTable`}/>
                                 )
                             },
-                            width: "200px"
                         },
                         {
                             title: '区块链hash',
                             key: 'blockchain_hash',
                             dataIndex: "blockchain_hash",
-                            width: '180px'
+                            render:(hash:string)=>{
+                                return <div style={{ wordBreak: 'break-all', width: '100px' }}>{hash}</div>
+                            }
                         },
                         {
                             title: '区块号',
@@ -125,7 +126,6 @@ export const WorkLog = (props: any) => {
                             render: (block_number: number) => {
                                 return (block_number === undefined ? (<>未验证</>) : (<>{block_number}</>))
                             },
-                            width: "180px"
                         }
                     ]}
                 />
