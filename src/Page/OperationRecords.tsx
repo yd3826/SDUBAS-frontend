@@ -170,7 +170,9 @@ const OperationRecords = () => {
                             title: '本地hash',
                             key: 'local_hash',
                             dataIndex: 'local_hash',
-                            width: '80px'
+                            render:(hash:string)=>{
+                                return <div style={{ wordBreak: 'break-all', width: '100px' }}>{hash}</div>
+                            }
                         },
                         {
                             title: '验证结果',
@@ -182,13 +184,14 @@ const OperationRecords = () => {
                                                  setDataSource={setDataSource} TableName={'OperationsTable'}/>
                                 )
                             },
-                            width: "80px"
                         },
                         {
                             title: '区块链hash',
                             key: 'blockchain_hash',
                             dataIndex: "blockchain_hash",
-                            width: '80px'
+                            render:(hash:string)=>{
+                                return <div style={{ wordBreak: 'break-all', width: '100px' }}>{hash}</div>
+                            }
                         },
                         {
                             title: '区块号',
@@ -197,7 +200,6 @@ const OperationRecords = () => {
                             render: (block_number: number) => {
                                 return (block_number === undefined ? (<>未验证</>) : (<>{block_number}</>))
                             },
-                            width: "80px"
                         }
                     ]}
                 />

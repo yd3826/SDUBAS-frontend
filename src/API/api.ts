@@ -1,12 +1,13 @@
 import request from "./request";
+
 export const Api: { [key: string]: any } = {
     //file文件
     checkFile: async (data: any) => {
         return request.post('/files/upload/valid', data.data);
     },
-    uploadFile: async (data: any,options:any) => {
+    uploadFile: async (data: any, options: any) => {
         return request.post('/files/upload', data.data,
-            {headers: {"Content-Type": "multipart/form-data"},...options});
+            {headers: {"Content-Type": "multipart/form-data"}, ...options});
     },
     getDownLoadUrl: async (data: any) => {
         return request.get('/files/download', data.data);
@@ -62,11 +63,11 @@ export const Api: { [key: string]: any } = {
     getOperations: async (data: any) => {
         return request.get('/operations', data.data);
     },
-    active:async (data:any)=>{
-        return request.put('/users/activation',data.data)//用户激活
+    active: async (data: any) => {
+        return request.put('/users/activation', data.data)//用户激活
     },
-    bindOJ:async (data:any)=>{
-        return request.post('/users/oj_bind',data.data);//绑定oj
+    bindOJ: async (data: any) => {
+        return request.post('/users/oj_bind', data.data);//绑定oj
     },
     //管理院添加用户部分
     //1.管理员添加角色
@@ -107,8 +108,8 @@ export const Api: { [key: string]: any } = {
     deleteSchool: async (data: any) => {
         return request.delete(`/users/school_delete/${data.sId}`, data.data);//删除学校
     },
-    newDefaultRole:async (data:any)=>{
-        return request.post('/',data.data);
+    newDefaultRole: async (data: any) => {
+        return request.post('/', data.data);
     },
 
     //college
@@ -177,7 +178,7 @@ export const Api: { [key: string]: any } = {
         return request.delete(`/resources/resource/${data.rId}/delete`, data?.data);//删除某一资源
     },
     getResourceUse: async (data: any) => {
-        return request.get(`/resources/resource/application/${data.rId}/${data.day}`,data.data);
+        return request.get(`/resources/resource/application/${data.rId}/${data.day}`, data.data);
     },
 
     //资金
@@ -274,51 +275,51 @@ export const Api: { [key: string]: any } = {
     Sign: async (data: any) => {
         return request.put(`/projects/${data.pId}/content/video/renew`, data.data);
     },
-    getRefresh:async (data:any)=>{
+    getRefresh: async (data: any) => {
         return request.get(`/projects/${data.pId}/${data.cId}/finish/renew`)
     },
-    getRefreshAll:async (data:any)=>{
+    getRefreshAll: async (data: any) => {
         return request.get(`/projects/${data.pId}/${data.cId}/finish/super`)
     },
-    getTypeCredits:async (data:any)=>{
-        return request.get(`/projects/${data.pId}/credits/all`,data.data);//获得所有的学分认证
+    getTypeCredits: async (data: any) => {
+        return request.get(`/projects/${data.pId}/credits/all`, data.data);//获得所有的学分认证
     },
     //oj
-    getOjPro:async (data:any)=>{
-        return request.get('/projects/api/contest/list',data.data);//比赛列表1
+    getOjPro: async (data: any) => {
+        return request.get('/projects/api/contest/list', data.data);//比赛列表1
         // return {rows:[{active:1,create_dt: "1697112050000",id:38,name:"A+B",tag:"11",type:'实验'}]};
     },
-    getOjContent:async (data:any)=>{
+    getOjContent: async (data: any) => {
         // return [{id:1,content:'222',prefix:'A题',name:'what'}]
-        return request.get(`/projects/api/contest/query/`,data.data);//返回比赛内容1
+        return request.get(`/projects/api/contest/query/`, data.data);//返回比赛内容1
     },
-    getSubmissionList:async (data:any)=>{
-        return request.get('/projects/api/contest/listSubmission',data.data);//返回提交记录1
-      // return {rows:[{submissionId:1,username:'202100150155',problemCode:'SDUOJ-1000',problemTitle:'A+B problem',result:'1',score:90,submitTime:'2023-11-01',code:'#include'}]}
+    getSubmissionList: async (data: any) => {
+        return request.get('/projects/api/contest/listSubmission', data.data);//返回提交记录1
+        // return {rows:[{submissionId:1,username:'202100150155',problemCode:'SDUOJ-1000',problemTitle:'A+B problem',result:'1',score:90,submitTime:'2023-11-01',code:'#include'}]}
     },
-    contestSubmit:async (data:any)=>{
-        return request.post('/projects/api/contest/createSubmission',data.data);//提交1
+    contestSubmit: async (data: any) => {
+        return request.post('/projects/api/contest/createSubmission', data.data);//提交1
     },
-    getSubmissionInfo:async (data:any)=>{
-      return request.get('/projects/api/contest/query/submission',data.data);//提交详情1
+    getSubmissionInfo: async (data: any) => {
+        return request.get('/projects/api/contest/query/submission', data.data);//提交详情1
     },
     //creditBank学分银行
     getUserCredits: async (data: any) => {
-        return request.get('/projects/user/credits',data.data);
+        return request.get('/projects/user/credits', data.data);
         // if(data.data.username === 'dyyy')
         //     return {credit: 55};
         // else return {credit:66}
     },
-    getRequirements:async (data:any)=>{
+    getRequirements: async (data: any) => {
         return request.get('/projects/user/credits')
         // return {rows:[{key:'0',name:'黄垚挺',type:'必修',completedCredits:70,requiredCredits:100},{key:'1',name:'黄垚挺',type:'国学',completedCredits:70,requiredCredits:100}]}
     },
-    getCourseByCredit:async (data:any)=>{
-      return request.get(`/projects/project/list/${data.type}`,data?.data);
-      // return {rows:[{course:'人工智能',credits:5,complete:1}]}
+    getCourseByCredit: async (data: any) => {
+        return request.get(`/projects/project/list/${data.type}`, data?.data);
+        // return {rows:[{course:'人工智能',credits:5,complete:1}]}
     },
-    getAllCourse:async (data:any)=>{
-        return request.get('/projects/list',data?.data);//请求所有课程
+    getAllCourse: async (data: any) => {
+        return request.get('/projects/list', data?.data);//请求所有课程
     },
 
     //permission权限
@@ -326,24 +327,24 @@ export const Api: { [key: string]: any } = {
         return request.get('/permission/', data.data);//获得某角色分配的list
     },
     deleteAssignment: async (data: any) => {
-        console.log('chao',data.data);
+        console.log('chao', data.data);
         return request.delete(`/resources/resource/delete_user_in_resources/${data.rId}/${data.roleId}/${data.uId}`,);//删除一个角色对某人的分配
     },
     getTemplates: async (data: any) => {
         return request.get('/permissions/projects/get_template_role', data.data);  //
         // return {rows:[{id:1,time_limit:1,template_name:'学生',permissions:['查看','提交']}]}
     },
-    createTemplates:async (data:any)=>{
-        return request.post(`/permissions/projects/add_template_role/${data.service_type}/${data.service_id}`,data.data);//创建模板角色
+    createTemplates: async (data: any) => {
+        return request.post(`/permissions/projects/add_template_role/${data.service_type}/${data.service_id}`, data.data);//创建模板角色
     },
-    applyTemplate:async (data:any)=>{
-        return request.post(`/permissions/projects/apply_template_role/${data.pId}/${data.role_id}`,data.data);//申请模板角色
+    applyTemplate: async (data: any) => {
+        return request.post(`/permissions/projects/apply_template_role/${data.pId}/${data.role_id}`, data.data);//申请模板角色
     },
-    getApplication:async (data:any)=>{
-        return request.get('/permissions/projects/get_applied_template_role',data.data);//请求项目待审批的申请
+    getApplication: async (data: any) => {
+        return request.get('/permissions/projects/get_applied_template_role', data.data);//请求项目待审批的申请
     },
-    approve:async (data:any)=>{
-      return request.post(`/permissions/projects/approve_template_role/${data.service_id}/${data.id}`,data.data);
+    approve: async (data: any) => {
+        return request.post(`/permissions/projects/approve_template_role/${data.service_id}/${data.id}`, data.data);
     },
     getPermission: async (data: any) => {
         return request.get('/permissions/return_privilege_list', data.data);//获得对应类型的权限
@@ -360,52 +361,59 @@ export const Api: { [key: string]: any } = {
     getWorkRole: async (data: any) => {
         return request.get('/permissions/get_work_role', data.data);//获得workrole
     },
-    addUserByRole:async (data:any)=>{
-        return request.post(`/resources/resource/add_user_in_resources/${data.rId}`,data.data);//往角色里添加用户
+    addUserByRole: async (data: any) => {
+        return request.post(`/resources/resource/add_user_in_resources/${data.rId}`, data.data);//往角色里添加用户
     },
-    getCreatedUsers:async (data:any)=>{
-        return request.get('/permissions/search_created_user',data.data);
+    getCreatedUsers: async (data: any) => {
+        return request.get('/permissions/search_created_user', data.data);
     },
-    addSchoolRole:async (data:any)=>{
-      return request.get('/permissions/educations/schools/add_school_role',data.data)
+    addSchoolRole: async (data: any) => {
+        return request.get('/permissions/educations/schools/add_school_role', data.data)
     },
-    addCollegeRole:async (data:any)=>{
-        return request.get('/permissions/educations/schools/add_college_role',data.data)
+    addCollegeRole: async (data: any) => {
+        return request.get('/permissions/educations/schools/add_college_role', data.data)
     },
-    addMajorRole:async (data:any)=>{
-        return request.get('/permissions/educations/schools/add_major_role',data.data)
+    addMajorRole: async (data: any) => {
+        return request.get('/permissions/educations/schools/add_major_role', data.data)
     },
-    addClassRole:async (data:any)=>{
-        return request.get('/permissions/educations/schools/add_class_role',data.data);
+    addClassRole: async (data: any) => {
+        return request.get('/permissions/educations/schools/add_class_role', data.data);
     },
-    getUserPermission:async (data:any)=>{
-        return request.get('/permissions/return_user_privilege_list',data.data);//获得当前登录用户权限
+    getUserPermission: async (data: any) => {
+        return request.get('/permissions/return_user_privilege_list', data.data);//获得当前登录用户权限
     },
 
 
     //个人档案
-    getPersonalProfile:async (data:any)=>{
-        return request.get('/projects/user/personal/file',data.data);
+    getPersonalProfile: async (data: any) => {
+        return request.get('/projects/user/personal/file', data.data);
     },
 
     //日志
-    getValid:async (data:any)=>{
-        return request.get("/users/get_operation",data.data)
+    getValid: async (data: any) => {
+        return request.get("/users/get_operation", data.data)
         // if(data.id == 1)
         //     return {data:true}
         // return {data:false}
     },
-    getValidAll:async (data:any)=>{
+    getValidAll: async (data: any) => {
         // console.log(data.data)
-        return request.get('/users/verify_hash',data.data);
+        return request.get('/users/verify_hash', data.data);
     },
-    getOperationLogs:async (data:any)=>{
-        return request.get("/users/get_operation",data.data)//获得所有操作日志
+    getOperationLogs: async (data: any) => {
+        return request.get("/users/get_operation",data.data)//获得所有操作日志?
+        // return {
+        //     rows: [{
+        //         func: "用户admin于2023-12-06 01:12:45访问http://111.15.182.56:41020/resources/financial/search输入参数{'pageNow': '1', 'pageSize': '20', 'searchKey': ''}查询资金列表",
+        //         oper_dt: "2023-12-06 01:12:45",
+        //         local_hash: "f868e6646aa6670cc358ec9d5290bc33189ebe8194cb091ad1905b4baf765a70",result:true,blockchain_hash:"f868e6646aa6670cc358ec9d5290bc33189ebe8194cb091ad1905b4baf765a70","block_number":91143
+        //     }]
+        // }
     },
-    getBlockInfo:async (data:any)=>{
+    getBlockInfo: async (data: any) => {
         return request.get('/users/block_chain_information')//获取区块链信息
     },
-    download:async (data:any)=>{
+    download: async (data: any) => {
         return request.get(`/files/download/${data.token}`)
     }
 }
