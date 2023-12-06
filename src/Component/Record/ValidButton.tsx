@@ -18,8 +18,9 @@ const ValidButton = (props: any) => {
             .then((data: any) => {
                 setRes(data[0].verify);
                 const dt = dataSource['dataSource']
+                console.log(dt['dataSource'][props.index])
                 dt['dataSource'][props.index] = {...dt['dataSource'][props.index],result:data[0].verify,block_number:data[0].block_number,blockchain_hash:data[0].blockchain_hash}
-                props.setDataSource(data,props.TableName);
+                props.setDataSource(dt,props.TableName);
             }).catch(() => {
             setLoadings(false)
         })
