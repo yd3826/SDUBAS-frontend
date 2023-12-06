@@ -7,8 +7,6 @@ import React, {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import ModalFormUseForm from "../Component/Common/Form/ModalFormUseForm";
 import {ResourceForm} from "../Component/Record/ResourceProfile";
-import {useSelector} from "react-redux";
-import {IState} from "../Type/base";
 
 const {Meta} = Card;
 
@@ -40,15 +38,15 @@ const ResourceInfo = () => {
                         {/*    TableName={'Resource' + rId + 'ApplyTable'}*/}
                         {/*/>*/}
                         {
-                            permissions.some((e: any) => e === '资源申请') && (
+                            // permissions.some((e: any) => e === '资源申请') && (
                                 <RequestResource rId={rId}
                                                  button={<Button type={'primary'} size={'small'}
                                                                  style={{marginTop: '20px'}}>申请</Button>}
                                                  TableName={'ApplicationTable'}/>
-                            )
+                            // )
                         }
                         {
-                            permissions.some((e: any) => e === '资源编辑') && (
+                            // permissions.some((e: any) => e === '资源编辑') && (
                                 <ModalFormUseForm
                                     title={'编辑资源'}
                                     type={'update'}
@@ -71,7 +69,7 @@ const ResourceInfo = () => {
                                         return Api.updateResource({data: value, rId: row.Id})
                                     }}
                                 />
-                            )
+                            // )
                         }
                     </Space>
                 )}

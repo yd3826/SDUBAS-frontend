@@ -97,13 +97,17 @@ const ResourceProfile = () => {
                                     return (
                                         <>
                                             <WorkLog service_type={5} service_id={rows.Id} btnType={'link'}/>
-                                            {permissions.some((e: any) => e === '资源编辑') && (
+                                            {
+                                                // permissions.some((e: any) => e === '资源编辑') && (
                                                 <ModalRoleManage editable={false} newRole={false} newUser={false}
                                                                  btnType={'link'}
                                                                  TableName={`Resource${rows.Id}Roles`}
                                                                  service_type={5}
-                                                                 service_id={rows.Id}/>)}
-                                            {permissions.some((e: any) => e === '资源删除') && (
+                                                                 service_id={rows.Id}/>
+                                            // )
+                                            }
+                                            {
+                                                // permissions.some((e: any) => e === '资源删除') && (
                                                 <DeleteConfirm
                                                     onConfirm={() => {
                                                         dispatch(getData(
@@ -123,7 +127,8 @@ const ResourceProfile = () => {
                                                         <Button type={'link'} danger={true}>删除</Button>
                                                     }
                                                 />
-                                            )}
+                                            // )
+                                            }
                                         </>
                                     )
                                 },

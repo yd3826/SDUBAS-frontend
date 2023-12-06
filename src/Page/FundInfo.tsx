@@ -46,7 +46,7 @@ const FundInfo = () => {
                 extra={
                     (<>
                             {
-                                permissions.some((e: any) => e === '资金管理') && (
+                                // permissions.some((e: any) => e === '资金管理') && (
                                     <>
                                         <AddBill fId={fId}
                                                  button={<Button type={"primary"} size={'small'}
@@ -71,7 +71,8 @@ const FundInfo = () => {
                                                 return Api.updateFund({fId: fId, data: value})
                                             }}
                                         />
-                                    </>)
+                                    </>
+                                // )
                             }
                         </>
                     )
