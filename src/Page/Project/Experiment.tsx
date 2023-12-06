@@ -133,7 +133,7 @@ const Experiment = () => {
                                     useList={true}
                                     API={async (data: any) => {
                                         // to do
-                                        return Api.getOjPro()
+                                        return Api.getOjPro(data)
                                     }}
                                     // initData={initData}
                                     size={'small'}

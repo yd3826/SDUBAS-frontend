@@ -319,7 +319,7 @@ const ContentPlay = (props: any) => {
                                         },
                                         "documentType": 'word',
                                     }}
-                                    height={'720px'}
+                                    height={'80vh'}
                                     width={'100%'}
                     />
                     // <iframe
@@ -347,7 +347,7 @@ const ContentPlay = (props: any) => {
                                         },
                                         "documentType": 'slide',
                                     }}
-                                    height={'720px'}
+                                    height={'80vh'}
                                     width={'100%'}
                     />
                 )
@@ -358,14 +358,14 @@ const ContentPlay = (props: any) => {
                         title="demo.docx"
                         src={file.url}
                         width="100%"
-                        height="720px"
+                        height="80vh"
                     />
                 )
             }
             {
                 file.file_type === 'zip' && (
                     <>
-                        <div style={{ display: "table", width: "200px", textAlign: "left", margin: "20px" }}>
+                        <div style={{ display: "table", width: "200px", textAlign: "left", margin: "20px",height:'80vh'}}>
                             <div style={{ display: "table-row" }}>
                                 <div style={{ display: "table-cell", padding: "10px", border: "1px solid #ccc" }}>
                                     {file.file_name}
