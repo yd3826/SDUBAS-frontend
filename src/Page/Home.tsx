@@ -7,6 +7,7 @@ import React from "react";
 import JumpButton from "../Component/Common/JumpButton";
 import Title from "antd/es/typography/Title";
 import moment from "moment";
+import {DocumentEditor} from "@onlyoffice/document-editor-react";
 
 const Home = () => {
     // Api.logout()
@@ -18,6 +19,24 @@ const Home = () => {
     // },[])
     return (
         <>
+            {/*<DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}*/}
+            {/*                config={{*/}
+            {/*                    "document": {*/}
+            {/*                        "fileType": "ppt",*/}
+            {/*                        "key": '',*/}
+            {/*                        "title": '编译原理与技术教学大纲2019版.docx',*/}
+            {/*                        "url": 'http://111.15.182.56:41016/api/files/download/b02cb928a0764a0bb3fc92790a6a2905',*/}
+            {/*                        permissions: {*/}
+            {/*                            edit: false, // 禁用编辑权限*/}
+            {/*                            download: true, // 启用下载权限*/}
+            {/*                            chat: false*/}
+            {/*                        },*/}
+            {/*                    },*/}
+            {/*                    "documentType": 'slide',*/}
+            {/*                }}*/}
+            {/*                height={'600vh'}*/}
+            {/*                width={'100%'}*/}
+            {/*/>*/}
             <Image src={BK1}
                    preview={false}
                    style={{maxWidth: "1500px", boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.3)"}}/>

@@ -308,7 +308,7 @@ const ContentPlay = (props: any) => {
                                     config={{
                                         "document": {
                                             "fileType": "docx",
-                                            "key": file.file_name,
+                                            "key": '',
                                             "title": file.file_name,
                                             "url": file.url,
                                             permissions: {
@@ -336,7 +336,7 @@ const ContentPlay = (props: any) => {
                                     config={{
                                         "document": {
                                             "fileType": "ppt",
-                                            "key": file.file_name,
+                                            "key": '',
                                             "title": file.file_name,
                                             "url": file.url,
                                             permissions: {
