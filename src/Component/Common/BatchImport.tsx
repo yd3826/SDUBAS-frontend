@@ -39,7 +39,6 @@ const BatchImport = (props: any) => {
                 onChange(newArr[0])
                 setVisible(false)
             } else {
-                setTimeout(() => {
                     props.API(newArr).then(() => {
                             message.success('导入成功！');
                             setVisible(false);
@@ -47,7 +46,6 @@ const BatchImport = (props: any) => {
                     ).catch(() => {
                         // message.error('导入失败')
                     })
-                }, 50000);
             }
         };
     };

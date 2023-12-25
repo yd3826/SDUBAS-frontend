@@ -46,7 +46,7 @@ const CreditBank = () => {
                             borderRadius: '4px',
                         }}
                     >
-                        {User.user_name === undefined ? (userinfo.userInfo?.username===undefined?`未登录` : `${userinfo.userInfo.username} 已修学分:${credits}`):`${User.name} 已修学分:${credits}`}
+                        {User.user_name === undefined ? (userinfo.userInfo?.username===undefined?`未登录` : `${userinfo.userInfo.username} 已修学分:${credits}`):`${User.user_name} 已修学分:${credits}`}
                     </span>
                 </>
             }>

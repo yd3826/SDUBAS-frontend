@@ -105,10 +105,10 @@ const MajorClass = () => {
                                             />
                                         </Col>
                                         <Col>
-                                            <BatchImport item={false} btnName={'上传方案'} btnType={'link'}
-                                                         API={async (data: any) => {
-                                                             return Api.newLine({data: data})
-                                                         }}/>
+                                            {/*<BatchImport item={false} btnName={'上传方案'} btnType={'link'}*/}
+                                            {/*             API={async (data: any) => {*/}
+                                            {/*                 return Api.newLine({data: data})*/}
+                                            {/*             }}/>*/}
                                             <DeleteConfirm
                                                 onConfirm={() => {
                                                     dispatch(getData(
