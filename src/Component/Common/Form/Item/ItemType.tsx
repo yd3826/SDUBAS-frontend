@@ -1,5 +1,4 @@
 import {Form, Select} from "antd";
-import {useState} from "react";
 
 const ItemType = (props: any) => {
     // const [select,setSelect] = useState(props.default);

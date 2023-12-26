@@ -12,7 +12,7 @@ const ItemTreeData = (props: any) => {
     const [treeData, setTreeData] = useState<any>(undefined)
     let nodeId = 0;
     useEffect(() => {
-        console.log(props.value);
+        // console.log(props.value);
         let initState:DataNode[] = [];
         if (props.value !== undefined&&treeData===undefined) {
             for (let i = 0; i < props.value.length; i++) {

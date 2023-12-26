@@ -6,7 +6,7 @@ const ItemStudentId = (props: any) => {
     return (
         <Form.Item
             name="studentId"
-            label={props.t("student_id")}
+            label={"学生Id"}
             initialValue={props.value}
         >
             <Input/>

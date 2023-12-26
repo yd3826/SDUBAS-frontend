@@ -57,7 +57,6 @@ export const Api: { [key: string]: any } = {
         return request.put('/users/password_update', data.data);
     },
     batchImport: async (data: any) => {
-        console.log(data);
         return request.post('/users/user_add_batch', data.data);
     },
     getOperations: async (data: any) => {
@@ -68,6 +67,9 @@ export const Api: { [key: string]: any } = {
     },
     bindOJ: async (data: any) => {
         return request.post('/users/oj_bind', data.data);//绑定oj
+    },
+    unbindOj:async ()=>{
+        return request.put('/users/oj_unbind')
     },
     //管理院添加用户部分
     //1.管理员添加角色
@@ -291,7 +293,7 @@ export const Api: { [key: string]: any } = {
     },
     getOjContent: async (data: any) => {
         // return [{id:1,content:'222',prefix:'A题',name:'what'}]
-        return request.get(`/projects/api/contest/query/`, data.data);//返回比赛内容1
+        return request.get(`/projects/api/contest/query`, data);//返回比赛内容1
     },
     getSubmissionList: async (data: any) => {
         return request.get('/projects/api/contest/listSubmission', data.data);//返回提交记录1
@@ -303,6 +305,7 @@ export const Api: { [key: string]: any } = {
     getSubmissionInfo: async (data: any) => {
         return request.get('/projects/api/contest/query/submission', data.data);//提交详情1
     },
+
     //creditBank学分银行
     getUserCredits: async (data: any) => {
         return request.get('/projects/user/credits', data.data);
@@ -327,7 +330,6 @@ export const Api: { [key: string]: any } = {
         return request.get('/permission/', data.data);//获得某角色分配的list
     },
     deleteAssignment: async (data: any) => {
-        console.log('chao', data.data);
         return request.delete(`/resources/resource/delete_user_in_resources/${data.rId}/${data.roleId}/${data.uId}`,);//删除一个角色对某人的分配
     },
     getTemplates: async (data: any) => {

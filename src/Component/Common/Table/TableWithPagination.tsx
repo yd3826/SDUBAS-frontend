@@ -83,7 +83,7 @@ const TableWithPagination = (props: any) => {
             searchKey: sk,
             ...fmp
         }).then((data: any) => {
-            console.log('data',data)
+            // console.log('data',data)
             if (data.rows === null) data.rows = []
             if (props.APIRowsTransForm !== undefined) {
                 setTableData(props.APIRowsTransForm(data))

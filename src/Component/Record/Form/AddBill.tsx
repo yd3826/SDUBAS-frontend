@@ -31,7 +31,7 @@ const AddBill = (props: any) => {
                 okText: "提交"
             }}
             onFinish={async (value:any)=>{
-                console.log('data',{fId:props.fId,data:{finance_id:props.fId,...value}})
+                // console.log('data',{fId:props.fId,data:{finance_id:props.fId,...value}})
                 return Api.newAccount({fId:props.fId,data:{finance_id:props.fId,...value}})
                     .then(()=>{
                         AddTableVersion('AccountTable');

@@ -16,12 +16,20 @@ import {sha256} from "js-sha256";
 import ModalFormUseForm from "../../Component/Common/Form/ModalFormUseForm";
 import {IKeyState} from "../../Type/key";
 import JSEncrypt from "jsencrypt";
-import DeleteConfirm, {Confirm} from "../../Component/Common/DeleteConfirm";
+import {Confirm} from "../../Component/Common/DeleteConfirm";
 
 
 const UserInfo = () => {
     const userPro = useSelector((state: IState) => state.UserReducer.userInfo);
-    const RSAKey = useSelector((state: IKeyState) => state.RSAPbKey)
+    const RSAKey = '-----BEGIN PUBLIC KEY-----\n' +
+        'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4E3IBJNbshjWs/VoGFAc\n' +
+        'uGV5EjwOVLvbegDw6zfIKUM+XwwQu146RwEsyvMm1yNDxdofQdzxlkNUEwHjGup1\n' +
+        'nJdRDUlJj/hTGVF87iCVUzL80vH0n2kGMCvYBXpBQ80SgEPWznQQbW7x9jUeyXMU\n' +
+        'pV/QBxZoiibBYqFaoeY+XNcT1e4fD3+epod59Zcn4sMli80499geP9dU6Q9r2gdW\n' +
+        '9DZuInrfzao18iFSjgCc9vSp6UZ2NKBYYNCpZvuTvF+gc+5UZf1Kos4an9912yvK\n' +
+        'ReIGTlGgP8ytvA1rtB9NFKy1sSu+f9uLLc/CtUn3qu8cgBW2CPsrFgG17EnNLN+p\n' +
+        'uQIDAQAB\n' +
+        '-----END PUBLIC KEY-----\n'
     const [username, setUsername] = useState(userPro?.username)
     const [email, setEmail] = useState(userPro?.email)
     const [oj_username,setOjUsername] = useState(userPro?.oj_username);
@@ -128,7 +136,7 @@ const UserInfo = () => {
                                         "getProfile",
                                         {},
                                         (res: any) => {
-                                            console.log(res);
+                                            // console.log(res);
                                             dispatch({type: "setUserInfo", data: res});
                                         },
                                         () => {
@@ -206,7 +214,7 @@ const UserInfo = () => {
                 {/*    /!*</div>*!/*/}
                 {/*</div>*/}
                 {
-                    userPro?.oj_bind ? (
+                    userPro?.oj_bind === 1? (
                         <>
                             <div
                                 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
@@ -217,6 +225,17 @@ const UserInfo = () => {
                                     title={'确认解绑'}
                                     onConfirm={()=>{
                                         //解绑API
+                                        Api.unbindOj().then(()=>{
+                                            dispatch(getData(
+                                                "getProfile",
+                                                {},
+                                                (res: any) => {
+                                                    dispatch({type: "setUserInfo", data: res});
+                                                },
+                                                () => {
+                                                }
+                                            ))
+                                        }).catch(()=>{})
                                     }}
                                     content={
                                         <Button type={'link'} danger>解绑</Button>
@@ -255,7 +274,7 @@ const UserInfo = () => {
                                                         }
                                                     ]}
                                                 >
-                                                    <Input placeholder={'密码'}/>
+                                                    <Input.Password placeholder={'密码'}/>
                                                 </Form.Item>
                                             </>
                                         ),

@@ -14,13 +14,10 @@ import {Api} from "../../API/api";
 import ProjectForm2 from "../../Component/Project/Form/ProjectForm2";
 import {arraytostr} from "../../Utils/arraytostr";
 import {tagOptions} from "../../Config/Project/data";
-import {useEffect} from "react";
 import {useDispatch} from "../../Redux/Store";
 
 
 const Experiment = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     return (
         <Tabs
             items={[
@@ -125,7 +122,7 @@ const Experiment = () => {
                                     useList={true}
                                     API={async (data: any) => {
                                         // to do
-                                        return Api.getOjPro(data)
+                                        return Api.getOjPro({data:{...data}})
                                     }}
                                     // initData={initData}
                                     size={'small'}
@@ -133,7 +130,7 @@ const Experiment = () => {
                                     renderItem={(item: any) => {
                                         return (
                                             <List.Item key={item.name}>
-                                                <ProCard item={item} TableName={'SDUOJProTable'}/>
+                                                <ProCard oj={true} item={item} TableName={'SDUOJProTable'}/>
                                             </List.Item>
                                         )
                                     }}

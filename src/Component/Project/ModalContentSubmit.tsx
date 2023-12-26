@@ -101,7 +101,7 @@ const ModalContentSubmit = (props: any) => {
                 width={'600px'}
             >
                 <TableWithPagination
-                    name={`SubmitContentTable`}
+                    name={`SubmitContentTable${props.cId}`}
                     API={async (data: any) => {
                         return Api.getPCSubmission({
                             pId: props.pId,
@@ -113,6 +113,7 @@ const ModalContentSubmit = (props: any) => {
                         })
                     }}
                     columns={columns}
+
                 />
             </Modal>
         </div>

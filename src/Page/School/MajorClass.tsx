@@ -55,7 +55,7 @@ const MajorClass = () => {
                                     ]}
                                     initData={{school_id: school.id, college_id: college.id}}
                                     dataSubmitter={async (data: any) => {
-                                        console.log(data)
+                                        // console.log(data)
                                         return Api.newMajor({data: data})
                                     }}
                                 />
@@ -91,7 +91,7 @@ const MajorClass = () => {
                                                 // dataLoader={async ()=>{return }}
                                                 initData={item}
                                                 dataSubmitter={async (data: any) => {
-                                                    console.log(data)
+                                                    // console.log(data)
                                                     return Api.updateMajor({mId: item.id, data: data})
                                                 }}
                                             />

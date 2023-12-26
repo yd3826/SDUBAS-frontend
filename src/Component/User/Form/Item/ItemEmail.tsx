@@ -31,9 +31,9 @@ const ItemEmail = (props: ItemEmailProps & any) => {
     return (
         <>
             {props.needVerify === false && (
-                <Form.Item name="email" label={props.t("email")}
+                <Form.Item name="email" label={"邮箱"}
                            rules={props.notCheck !== true ? [
-                               {type: 'email', message: props.t('emailError')},
+                               {type: 'email', message: ('邮箱错误')},
                                {required: props.editable !== false}
                            ] : undefined}
                            hasFeedback>

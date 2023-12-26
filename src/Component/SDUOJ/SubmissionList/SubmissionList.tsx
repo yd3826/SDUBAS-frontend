@@ -8,14 +8,6 @@ import {StateList, SubmissionMap} from "../../../Type/submission";
 
 
 const SubmissionInfo = (props: any) => {
-    const [code,setCode] = useState('');
-    useEffect(() => {
-        Api.getSubmissionInfo({data:{submissionId:props.record.submissionId,contestId:props.contestId}})
-            .then((res:any)=>{
-                console.log('提交详情',res);
-                setCode(res.code);
-            }).catch(()=>{})
-    }, [])
     return (
         <TestCase
             type={"text"}
@@ -25,7 +17,8 @@ const SubmissionInfo = (props: any) => {
                     "(" + props.record.RunningStep + "/" + (props.record.checkpointNum + props.record.publicCheckpointNum) + ")"
                     : ""
             }
-            submitcode={code}
+            record={props.record}
+            contestId={props.contestId}
         />
     )
 }
@@ -47,9 +40,9 @@ export const SubmissionList = (props: any) => {
                 width={'1200px'}
             >
                 <TableWithPagination
-                    name={'SubmissionList'}
+                    name={`SubmissionList${props.contestId}${props.problemCode}`}
                     API={async (data: any) => {
-                        return Api.getSubmissionList({data: {...data, contestId: props.contestId}})
+                        return Api.getSubmissionList({data: {...data, contestId: props.contestId,problemCode:props.problemCode,username:'sdubas_bind'}})
                     }}
                     columns={[
                         {
@@ -67,10 +60,9 @@ export const SubmissionList = (props: any) => {
                             dataIndex: "problemCode",
                             key: "problemCode",
                             render: (text: any) => {
-                                let ps = text.split("-")
                                 return (
                                     <>
-                                        <span>{ps[0]}</span> - <span>{ps[1]}</span>
+                                        <span>SDUOJ</span> - <span>{text}</span>
                                     </>
                                 )
                             }

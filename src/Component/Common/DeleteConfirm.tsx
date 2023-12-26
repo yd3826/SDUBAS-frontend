@@ -8,7 +8,7 @@ const DeleteConfirm = (props: any) => {
             title={"确认删除"}
             onConfirm={props.onConfirm}
             okText={'确认'}
-            cancelText={props.t("取消")}
+            cancelText={"取消"}
         >
             {props.content}
         </Popconfirm>

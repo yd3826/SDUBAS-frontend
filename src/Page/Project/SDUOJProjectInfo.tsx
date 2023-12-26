@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Layout, Space, Tree, Image, Tag, Button, Menu, Dropdown, MenuProps, Divider} from 'antd';
+import {Layout, Space, Tree, Image, Tag, Button, Menu, Dropdown, MenuProps, Divider, Card} from 'antd';
 import {DataNode} from 'antd/lib/tree';
 import Title from "antd/es/typography/Title";
 import {useLocation, useParams} from "react-router-dom";
 import {tagOptions} from "../../Config/Project/data";
-import {useSelector} from "react-redux";
-import {IState} from "../../Type/base";
 import {Api} from "../../API/api";
 import {buildTree} from "../../Utils/buildTree";
 import {DownOutlined} from "@ant-design/icons";
 import {SubmissionList} from "../../Component/SDUOJ/SubmissionList/SubmissionList";
 import {SDUSubmit} from "../../Component/SDUOJ/SDUSubmit";
 import ReactMarkdown from "react-markdown";
+import SampleTestCase from "../../Component/SDUOJ/SampleTestCase";
 
 
 const {Sider, Content} = Layout;
@@ -31,9 +30,10 @@ const ProjectInfo: React.FC = () => {
     const [selectedMenuKey, setSelectedMenuKey] = useState<number | null>(null);
     const [type, setType] = useState<IProjectContentType>("office_word")//原本的数据
     const [treeData, setTreeData] = useState<DataNode[] | undefined>(undefined);//树形数据
+    const [available,setAvailable] = useState(true);
     const {pId} = useParams();
     const location = useLocation();
-    const {item, permissions} = location.state;
+    const {item} = location.state;
     const generateTreeData = (data: any) => {//根据后端数据递归获得treeData
         return data.map((item: any) => {
             let {key, children, isLeaf} = item;
@@ -51,14 +51,18 @@ const ProjectInfo: React.FC = () => {
     useEffect(() => {
         Api.getOjContent({contestId: pId})
             .then(async (data: any) => {
-                console.log('oj比赛内容',data);
-                data.map((d: any) => {
+                if(data.contents.length === 0)
+                {
+                    setAvailable(false);
+                    return;
+                }
+                data.contents.map((d: any) => {
                     const {id} = d;
                     IdConMap[id] = d;
                 })
-                setSelectedMenuKey(data[0].id);
-                // console.log(IdConMap);
-                const Tree = buildTree(data);
+                setSelectedMenuKey(data.contents[0].id);
+                const Tree = buildTree(data.contents);
+                // console.log(Tree)
                 setTreeData(() => {
                     return [...Tree]
                 });
@@ -90,13 +94,6 @@ const ProjectInfo: React.FC = () => {
         <div style={{minWidth: 600}}>
             <div style={{textAlign: "left", marginBottom: 12, marginLeft: 6}}>
                 <Space size={24}>
-                    <Image
-                        preview={false}
-                        width={80}
-                        height={45}
-                        src={item.url}
-                        alt={item.name}
-                    />
                     <Space direction="vertical" size={0}>
                         <Space>
                             <Title level={4} style={{margin: 0}}>{item.name}</Title>
@@ -152,9 +149,22 @@ const ProjectInfo: React.FC = () => {
                 <Layout style={{height:'100vh'}}>
                     <Content style={{padding: '24px'}}>
                         {
-                            selectedMenuKey && IdConMap[selectedMenuKey] && (
+                           !available&& (
+                                <div style={{fontSize:'20px'}}>
+                                    <h1>无权限查看</h1>
+                                    <p>抱歉，您没有权限查看该内容。</p>
+                                </div>
+                            )
+                        }
+                        {
+                            available&&selectedMenuKey && IdConMap[selectedMenuKey] && (
                                 <div style={{textAlign: "left"}}>
                                     <ReactMarkdown children={IdConMap[selectedMenuKey].content}/>
+                                    {IdConMap[selectedMenuKey].case !== undefined && IdConMap[selectedMenuKey].case.length !== 0 && (
+                                        <Card bordered={false} title={"测试样例"} style={{marginTop: "5px"}}>
+                                            <SampleTestCase testCase={IdConMap[selectedMenuKey].case}/>
+                                        </Card>
+                                    )}
                                 </div>
                             )
                             // <iframe

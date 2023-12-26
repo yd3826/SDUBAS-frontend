@@ -11,7 +11,7 @@ export enum Sex {
 export interface IUserInfo {
     email: string
     username: string
-    oj_bind:boolean//oj绑定
+    oj_bind:number//oj绑定
     oj_username:string,
 }
 

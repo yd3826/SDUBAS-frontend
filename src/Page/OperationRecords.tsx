@@ -58,7 +58,7 @@ const OperationRecords = () => {
     }, [dataSource?.tablePageInfo?.pageNow])
     useEffect(() => {
         Api.getBlockInfo().then((res: any) => {
-            console.log(res);
+            // console.log(res);
             setBlockInfo(res);
         }).catch(() => {
         })
@@ -115,7 +115,7 @@ const OperationRecords = () => {
                     <Descriptions.Item label={'最新区块高度'}>{blockInfo?.latest_block_height}</Descriptions.Item>
                     <Descriptions.Item label={'最新区块时间戳'}>{formatTimestamp(blockInfo?.latest_block_time || '')}</Descriptions.Item>
                     <Descriptions.Item label={'验证者地址'}>{blockInfo?.address}</Descriptions.Item>
-                    <Descriptions.Item label={'创世区块时间'}>{formatTimestamp(blockInfo?.earliest_block_time || '')}</Descriptions.Item>
+                    <Descriptions.Item label={'创世区块时间'}>{formatTimestamp("2023-11-26T06:38:23.283227273Z")}</Descriptions.Item>
                     {/*<Descriptions.Item label={'节点id'}>ddc4b1fd46771dcaabd4e30ed7d8d0039ebc532a</Descriptions.Item>*/}
                     {/*<Descriptions.Item label={'用户数量'}>2573</Descriptions.Item>*/}
                     {/*<Descriptions.Item label={'交易总数'} style={{width:'150px'}}>14235</Descriptions.Item>*/}

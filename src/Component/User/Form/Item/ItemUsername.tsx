@@ -19,7 +19,7 @@ const ItemUsername = (props: any) => {
                         validator(_, value) {
                             if (props.ExistCheck === true) {
                                 return Api.isExist({data: {username: value}}).then((data: any) => {
-                                    console.log('data', data);
+                                    // console.log('data', data);
                                     if (data === true) return Promise.resolve()
                                     else if (data === false) return Promise.reject("用户名已存在")
                                     return Promise.reject("检验失败")

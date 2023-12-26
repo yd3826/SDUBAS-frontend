@@ -108,7 +108,7 @@ const UploadFile = (props: any) => {
                 }
                 else
                     data = {size: size, ...code}
-                console.log(data)
+                // console.log(data)
                 Api.checkFile({data: {...data, type: props.aes}})
                     .then((res: any) => {
                         if (res.file_id !== null) {

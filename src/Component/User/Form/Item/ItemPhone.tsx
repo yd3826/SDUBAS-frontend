@@ -6,7 +6,7 @@ const ItemPhone = (props: any) => {
     return (
         <Form.Item
             name="phone"
-            label={props.t("phone")}
+            label={("phone")}
             initialValue={props.value}
             rules={[{
                 required: props.required

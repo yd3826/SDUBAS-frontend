@@ -44,6 +44,7 @@ const ProjectInfo: React.FC = () => {
     const userinfo = useSelector((state: IState) => state.UserReducer.userInfo);
     const location = useLocation();
     const {item, permissions} = location.state;
+    // console.log(item)
     const generateTreeData = (data: any) => {//根据后端数据递归获得treeData
         return data.map((item: any) => {
             let {key, children, isLeaf} = item;
@@ -108,7 +109,7 @@ const ProjectInfo: React.FC = () => {
         }
     ]
     if (item.type !== '教学资源' || item.type !== '实验' ) {
-        if (permissions.some((e: any) => e === '项目学分认定'))
+        // if (permissions.some((e: any) => e === '项目学分认定'))
             manageitems.push({
                 key: '3', label: (
                     <CreditsRole pId={pId}/>
@@ -116,7 +117,7 @@ const ProjectInfo: React.FC = () => {
             })
     }
     if (selectedMenuKey && IdConMap[selectedMenuKey]) {
-        if (permissions.some((e: any) => e === '项目提交'))
+        // if (permissions.some((e: any) => e === '项目提交'))
             items = [
                 {
                     key: '1',
@@ -144,7 +145,7 @@ const ProjectInfo: React.FC = () => {
                     )
                 }
             ]
-        if (permissions.some((e: any) => e === '项目批阅'))
+        // if (permissions.some((e: any) => e === '项目批阅'))
             items.push(
                 {
                     key: '3',
@@ -155,7 +156,7 @@ const ProjectInfo: React.FC = () => {
                 }
             )
         if (item.type !== '教学资源') {
-            if (permissions.some((e: any) => e === '项目批阅')) {
+            // if (permissions.some((e: any) => e === '项目批阅')) {
                 manageitems.push({
                     key: '', label: (
                         <ModalFormUseForm
@@ -184,20 +185,24 @@ const ProjectInfo: React.FC = () => {
                         Api.getRefreshAll({pId: pId, cId: keyIdMap[selectedMenuKey].key})
                     }}>更新全部</Button>)
                 })
-            }
+            // }
         }
     }
     return (
         <div style={{minWidth: 800}}>
             <div style={{textAlign: "left", marginBottom: 12, marginLeft: 6}}>
                 <Space size={24}>
-                    <Image
-                        preview={false}
-                        width={80}
-                        height={45}
-                        src={item.url}
-                        alt={item.name}
-                    />
+                    {
+                        item.url&&(
+                            <Image
+                                preview={false}
+                                width={80}
+                                height={45}
+                                src={item.url}
+                                alt={item.name}
+                            />
+                        )
+                    }
                     <Space direction="vertical" size={0}>
                         <Space>
                             <Title level={4} style={{margin: 0}}>{item.name}</Title>
@@ -304,7 +309,7 @@ const ContentPlay = (props: any) => {
             }
             {
                 (file.file_type === "office_word") && (
-                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}
+                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8080'}
                                     config={{
                                         "document": {
                                             "fileType": "docx",
@@ -332,7 +337,7 @@ const ContentPlay = (props: any) => {
             }
             {
                 file.file_type === "office_ppt" && (
-                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}
+                    <DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8080'}
                                     config={{
                                         "document": {
                                             "fileType": "ppt",

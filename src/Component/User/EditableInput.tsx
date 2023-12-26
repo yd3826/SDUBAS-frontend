@@ -21,7 +21,7 @@ const EditableInput = (props: any) => {
                 "getProfile",
                 {},
                 (res: any) => {
-                    console.log(res);
+                    // console.log(res);
                     dispatch({type: "setUserInfo", data: res});
                 },
                 () => {

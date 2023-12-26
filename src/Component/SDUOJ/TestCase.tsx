@@ -17,6 +17,7 @@ import Text from "antd/lib/typography/Text";
 import {displayType, StateList, TestCaseStates} from "../../Type/submission";
 import {ck} from "../../Utils/isValueEmpty"
 import TextArea from "antd/es/input/TextArea";
+import {Api} from "../../API/api";
 
 
 interface ViewType {
@@ -34,7 +35,8 @@ export interface TestCaseProp {
     textLevel?: number
     scoreMod?: displayType
     caseID?: string
-    submitcode: string
+    record: any,
+    contestId: any
 }
 
 interface ITestCaseProp extends WithTranslation, TestCaseProp, ViewType {
@@ -47,11 +49,26 @@ class TestCase extends Component<ITestCaseProp, any> {
         super(props);
         this.state = {
             MouseIn: false,
-            visible: false
+            visible: false,
+            submitCode: undefined
         }
     }
 
+
     render() {
+        const loadCode=()=> {
+            Api.getSubmissionInfo({
+                data: {
+                    submissionId: this.props.record.submissionId,
+                    contestId: this.props.contestId
+                }
+            })
+                .then((res: any) => {
+                    this.setState({submitCode: res.code,visible:true});
+                }).catch(() => {
+            })
+        }
+
         const NameList = StateList
         const {t} = this.props
         const CaseList: { [key: string]: any } = {
@@ -184,7 +201,7 @@ class TestCase extends Component<ITestCaseProp, any> {
                     this.props.caseTime !== undefined && (
                         <>
                             <Text strong>
-                                {this.props.t("Time")}
+                                {"时间"}
                             </Text> : {this.props.caseTime} ms
                         </>
                     )
@@ -194,7 +211,7 @@ class TestCase extends Component<ITestCaseProp, any> {
                         <>
                             <br/>
                             <Text strong>
-                                {this.props.t("Memory")}
+                                {"空间"}
                             </Text> : {Math.floor(this.props.caseMemory / 1024)} MB
                         </>
                     )
@@ -204,7 +221,7 @@ class TestCase extends Component<ITestCaseProp, any> {
                         <>
                             <br/>
                             <Text strong>
-                                {this.props.t("Score")}
+                                {"分数"}
                             </Text> : {this.props.caseType === TestCaseStates.Accepted ? this.props.caseScore : 0}
                         </>
                     )
@@ -244,17 +261,18 @@ class TestCase extends Component<ITestCaseProp, any> {
                                     </Tag>
                                 </Tooltip>
                             )
-
                         case "text":
                             return (
-                                    <Title
-                                        style={{marginTop:'5px'}}
-                                        level={ck(this.props.textLevel, 5)}
-                                        type={CaseList[type].type}
-                                        onClick={()=>{this.setState({visible: true})}}
-                                    >
-                                        {CaseList[type].textAll + (this.props.append !== undefined ? this.props.append : "")}
-                                    </Title>
+                                <Title
+                                    style={{marginTop: '5px'}}
+                                    level={ck(this.props.textLevel, 5)}
+                                    type={CaseList[type].type}
+                                    onClick={() => {
+                                        loadCode();
+                                    }}
+                                >
+                                    {CaseList[type].textAll + (this.props.append !== undefined ? this.props.append : "")}
+                                </Title>
                             )
                         case "index":
                             return (
@@ -285,7 +303,7 @@ class TestCase extends Component<ITestCaseProp, any> {
                     footer={null}
                 >
                     <TextArea
-                        value={this.props.submitcode}
+                        value={this.state.submitCode}
                     />
                 </Modal>
             </>

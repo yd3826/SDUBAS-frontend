@@ -9,7 +9,7 @@ import {sha256} from "js-sha256";
 
 const NewPwd = () => {
     const {token,username} = useParams();
-    console.log(token,username);
+    // console.log(token,username);
     const navigate = useNavigate();
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>

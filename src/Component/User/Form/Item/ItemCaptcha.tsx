@@ -10,7 +10,7 @@ const ItemCaptcha = (props: any) => {
 
     const getCaptcha = () => {
         Api.getCaptcha().then((data:any)=>{
-            console.log(data);
+            // console.log(data);
             setImage(data.captcha)
             props.setImgId(data.captchaId)
         }).catch(()=>{})
@@ -51,7 +51,7 @@ const ItemCaptcha = (props: any) => {
                         return (
                             <Form.Item
                                 name="captcha"
-                                label={props.t("验证码")}
+                                label={"验证码"}
                                 rules={[
                                     {required: true},
                                 ]}

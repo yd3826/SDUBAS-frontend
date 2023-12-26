@@ -75,6 +75,14 @@ export const ProOptions=[
         key:'教学资源',
         value:'教学资源'
     },
+    {
+        key:'竞赛',
+        value:'竞赛',
+    },
+    {
+        key:'活动',
+        value:'活动'
+    }
 ]
 
 export const CntOptions = [
@@ -156,17 +164,21 @@ export const activeType = [
 ]
 
 
-export const creditsType = [
-    {
-        key:0,
-        value:'国学修养'
-    },
-    {
-        key:1,
-        value:'大学英语'
-    },
-    {
-        key:2,
-        value:'专业必修'
-    }
-]
+export const creditsType =[
+    '思想政治理论课',
+    '大学体育',
+    '大学英语',
+    '国学修养',
+    '艺术审美',
+    '创新创业',
+    '人文学科',
+    '社会科学',
+    '科学素养',
+    '信息技术',
+    '通识教育选修课程',
+    '专业必修课程',
+    '专业选修课程',
+    '重点提升必修课程',
+    '齐鲁创业',
+    '稷下创新'
+].map((value:string,index)=>{return {key:index,value:value}})

@@ -11,6 +11,7 @@ export const SDUSubmit = (props: any) => {
             btnType={'text'}
             btnName={'提交'}
             width={'1000px'}
+            TableName={`SubmissionList${props.contestId}${props.problemCode}`}
             subForm={[
                 {
                     component: (
@@ -53,8 +54,8 @@ export const SDUSubmit = (props: any) => {
                 }
             ]}
             dataSubmitter={async (data:any)=>{
-                console.log('提交内容',data);
-                return Api.contentSubmit({data:data})
+                // console.log('提交内容',data);
+                return Api.contestSubmit({data:{...data}})
             }}
         />
     )

@@ -1,8 +1,11 @@
 import DeleteConfirm, {Confirm} from "../../Component/Common/DeleteConfirm";
-import {Button, message, Modal, Progress} from "antd";
+import {Button, message, Modal, Progress, Tag} from "antd";
 import {useDispatch} from "../../Redux/Store";
 import Template from "../../Component/Project/Template";
 import {Api} from "../../API/api";
+import {useNavigate} from "react-router-dom";
+import React from "react";
+import {convertTagstr} from "../../Utils/convertTagstr";
 
 interface ApprovalProps {
     API: any;
@@ -57,39 +60,59 @@ export const ApprovalColumns = (props: ApprovalProps) => {
     )
 }
 
-export const PersonalProfileColumns = [
-    {
-        title: '经历',
-        children: [
-            {
-                title: '经历名称',
-                dataIndex: 'name',
-                key: 'proName'
-            },
-            {
-                title: '性质',
-                dataIndex: 'type',
-                key: 'type',
-                filters: [
-                    {
-                        text: '活动',
-                        value: '活动'
-                    },
-                    {
-                        text: '竞赛',
-                        value: '竞赛'
+
+export const PersonalProfileColumns = () => {
+    const navigate = useNavigate();
+    return [
+        {
+            title: '经历',
+            children: [
+                {
+                    title: '经历名称',
+                    key: 'proName',
+                    dataIndex: 'name',
+                    render: (name: string, item: any) => {
+                        return <span
+                            onClick={()=>{navigate(`/c/project-info/${item.id}`, {
+                                state: {
+                                    url: item.url,
+                                    item: item,
+                                    permissions:[],
+                                }
+                            });}}
+                        >{name}</span>
                     }
-                ],
-                onFilter: (value: string, record: any) => record.type.indexOf(value) === 0,
+                },
+                {
+                    title: '性质',
+                    dataIndex: 'type',
+                    key: 'type',
+                    filters: [
+                        {
+                            text: '活动',
+                            value: '活动'
+                        },
+                        {
+                            text: '竞赛',
+                            value: '竞赛'
+                        }
+                    ],
+                    onFilter: (value: string, record: any) => record.type.indexOf(value) === 0,
+                }
+            ]
+        },
+        {
+            title: '标签',
+            key: 'tag',
+            dataIndex:'tag',
+            render: (tag: string) => {
+                // console.log('tag', tag)
+                const tags = convertTagstr(tag);
+                return <Tag style={{fontSize: '12px'}}>{tags}</Tag>
             }
-        ]
-    },
-    {
-        title: '标签',
-        dataIndex: 'tag',
-        key: 'tag'
-    }
-]
+        }
+    ]
+}
 
 
 export const CreditBankColumns = [
@@ -159,7 +182,7 @@ export const CreditBankChildColumns = [
     }
 ]
 
-export const TemplateColumns = (props:any)=>[
+export const TemplateColumns = (props: any) => [
     {
         title: '模板名称',
         dataIndex: 'role_name',
@@ -169,13 +192,13 @@ export const TemplateColumns = (props:any)=>[
         title: '模板权限',
         dataIndex: 'privilege_list',
         key: 'permission',
-        render:(list:any)=>{
+        render: (list: any) => {
             let str = ''
-            for(let i = 0;i < list.length;i++)
-                if(i != list.length-1)
-                    str += list[i]+','
+            for (let i = 0; i < list.length; i++)
+                if (i != list.length - 1)
+                    str += list[i] + ','
                 else str += list[i]
-            return(<span>{str}</span>)
+            return (<span>{str}</span>)
         }
     },
     {
@@ -185,23 +208,25 @@ export const TemplateColumns = (props:any)=>[
             return (
                 <>
                     {
-                        record.status === -1?(
+                        record.status === -1 ? (
                             <Button
                                 type={'link'}
-                                onClick={()=>{
-                                    Api.applyTemplate({pId:props.pId,role_id:record.role_id})
-                                        .then(()=>{
+                                onClick={() => {
+                                    Api.applyTemplate({pId: props.pId, role_id: record.role_id})
+                                        .then(() => {
                                             message.success('申请成功');
                                             props.addTableVersion('TemplateRolesTable');
                                         })
-                                        .catch(()=>{})
+                                        .catch(() => {
+                                        })
                                 }}
                             >
                                 申请
                             </Button>
-                        ):record.status === 1?(
-                            <div style={{color:'blue'}}>申请中</div>
-                        ):record.status === 0?<div style={{color:'green'}}>通过</div>:<div style={{color:'red'}}>拒绝</div>
+                        ) : record.status === 1 ? (
+                            <div style={{color: 'blue'}}>申请中</div>
+                        ) : record.status === 0 ? <div style={{color: 'green'}}>通过</div> :
+                            <div style={{color: 'red'}}>拒绝</div>
                     }
                 </>
             )

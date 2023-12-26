@@ -18,23 +18,24 @@ import {convertTimestamp} from "../../Utils/convertTimestamp";
 import {convertTagstr} from "../../Utils/convertTagstr";
 
 
-export default function ProCard({item, TableName, pathname}: any) {
+export default function ProCard({item, TableName, pathname,oj}: any) {
     const [t] = useTranslation();
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [permission,setPermission] = useState<any>([]);
-    const tags = convertTagstr(item.tag);
+    let tags = convertTagstr(item.tag);
+    if(oj)tags='OJ'
     const AddTableVersion = (name: string) => {
         dispatch({type: 'addTableVersion', name: name});
     }
-    useEffect(()=>{
-        Api.getUserPermission({data: {service_type: 7,service_id:item.id}})
-            .then((res: any) => {
-                    setPermission(res.map((e: any) => e.label))
-                }
-            )
-    },[])
+    // useEffect(()=>{
+    //     Api.getUserPermission({data: {service_type: 7,service_id:item.id}})
+    //         .then((res: any) => {
+    //                 setPermission(res.map((e: any) => e.label))
+    //             }
+    //         )
+    // },[])
     return (
         <Card
             style={{
@@ -44,7 +45,7 @@ export default function ProCard({item, TableName, pathname}: any) {
         >
             <Row style={{minWidth: '1200px'}}>
                 {
-                    tags !== 'SDUOJ ' && (
+                    !oj && (
                         <Col span={2} style={{height: "80px"}}>
                             <Image
                                 src={item.url}
@@ -59,7 +60,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                          if (item.active === 0) {
                              message.info('未开放');
                          } else {
-                             if (tags === 'SDUOJ ') {
+                             if (oj) {
                                  navigate(`/c/sduoj/project-info/${item.id}`, {
                                      state: {
                                          url: item.url,
@@ -100,7 +101,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'flex-start'}} span={4}>
                     {
-                        permission.some((e: any) => e === '项目编辑') && tags !== 'SDUOJ ' && (
+                        !oj && (
                             <>
                                 <ModalFormUseForm
                                     title={t('编辑项目')}
@@ -125,7 +126,7 @@ export default function ProCard({item, TableName, pathname}: any) {
                                     }}
                                     // initData={{img_id:{file_name:'what',url:"https://tse3-mm.cn.bing.net/th/id/OIP-C.dGSqeSYfrebW8r7baIn2BQAAAA?rs=1&pid=ImgDetMain"},type:'xx',contents:[{file_id:{file_name:'ww',url:'https://tse3-mm.cn.bing.net/th/id/OIP-C.dGSqeSYfrebW8r7baIn2BQAAAA?rs=1&pid=ImgDetMain'}}]}}
                                     dataSubmitter={(value: any) => {
-                                        console.log(value)
+                                        // console.log(value)
                                         value.tag = arraytostr(value.tag);
                                         return Api.updatePro({pId: item.id, data: value});
                                     }}

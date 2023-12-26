@@ -9,7 +9,11 @@ export const buildTree = (leafNodes:any) => {
     // 构建节点路径映射表
     const pathMap:map = {};
     for (const node of leafNodes) {
-        const { prefix } = node;
+        let { prefix } = node;
+        if(prefix === null)
+        {
+            prefix = '/'
+        }
          // 去除空字符串
         pathMap[prefix] = prefix.split('/').filter(Boolean);
     }

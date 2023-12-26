@@ -43,10 +43,10 @@ const SubmissionSForm = (props: any) => {
                     // bodyStyle:{height:"500px"}
                 }}
                 onFinish={(values: any) => {
-                    console.log(values);
+                    // console.log(values);
                     return Api.submit({pId: props.pId, cId: props.cId, data: values}).then(() => {
                         message.success('提交成功');
-                        addTableVersion(`SubmitContentTable`);
+                        addTableVersion(`SubmitContentTable${props.cId}`);
                         return Promise.resolve(true);
                     }).catch(() => {
                         // message.error('错误')

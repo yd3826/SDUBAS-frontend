@@ -19,13 +19,13 @@ const Home = () => {
     // },[])
     return (
         <>
-            {/*<DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8000'}*/}
+            {/*<DocumentEditor id={"docxEditor"} documentServerUrl={'http://43.138.34.119:8080'}*/}
             {/*                config={{*/}
             {/*                    "document": {*/}
             {/*                        "fileType": "ppt",*/}
             {/*                        "key": '',*/}
             {/*                        "title": '编译原理与技术教学大纲2019版.docx',*/}
-            {/*                        "url": 'http://111.15.182.56:41016/api/files/download/b02cb928a0764a0bb3fc92790a6a2905',*/}
+            {/*                        "url": 'http://43.138.34.119/api/files/download/4e2e8144b1994d4eb2d7932e4453b68f',*/}
             {/*                        permissions: {*/}
             {/*                            edit: false, // 禁用编辑权限*/}
             {/*                            download: true, // 启用下载权限*/}
